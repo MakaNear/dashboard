@@ -1,7 +1,10 @@
-//lib call
 import { folderPath } from "https://cdn.jsdelivr.net/gh/jscroot/url@0.0.9/croot.js";
 
+// Debug untuk melihat hasil dari folderPath()
+console.log("folderPath() result:", folderPath());
+
 export const croot = folderPath() + "src/";
+console.log("croot:", croot);
 
 export const folder = {
   components: croot + "components/",

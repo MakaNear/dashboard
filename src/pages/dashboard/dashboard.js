@@ -3,18 +3,24 @@ import { smoothScroll } from "/src/helpers/smoothScroll.js";
 import { url } from "/src/helpers/urlConfig.js";
 
 export async function main() {
-  const promises = [
-    loadComponent("header.topbar", url.components.topbar + "topbar.html"),
-    loadComponent("aside.sidebar", url.components.sidebar + "sidebar.html"),
-    // loadComponent(".dashboard .content", url.pages.dashboard + "content/content.html"),
-    loadComponent("footer.footer", url.components.footer + "footer.html"),
-  ];
+  // Tunggu hingga halaman selesai dimuat
+  document.addEventListener("DOMContentLoaded", async () => {
+    try {
+      // Memuat semua komponen menggunakan Promise.all
+      await Promise.all([
+        loadComponent("header.topbar", url.components.topbar + "topbar.html"),
+        loadComponent("aside.sidebar", url.components.sidebar + "sidebar.html"),
+        loadComponent(
+          ".dashboard .content",
+          url.pages.dashboard + "content/content.html"
+        ),
+        loadComponent("footer.footer", url.components.footer + "footer.html"),
+      ]);
 
-  Promise.all(promises)
-    .then(() => {
+      // Memastikan smooth scroll dijalankan setelah semua komponen terload
       smoothScroll();
-    })
-    .catch((error) => {
+    } catch (error) {
       console.error("Error loading components:", error);
-    });
+    }
+  });
 }

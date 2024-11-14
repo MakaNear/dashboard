@@ -22,3 +22,7 @@ export const url = {
     dashboard: folder.pages + "dashboard/",
   },
 };
+
+// Debug untuk melihat hasil akhir dari path
+console.log("URL Components:", url.components);
+console.log("URL Pages:", url.pages);

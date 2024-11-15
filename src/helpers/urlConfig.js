@@ -1,10 +1,10 @@
 import { folderPath } from "https://cdn.jsdelivr.net/gh/jscroot/url@0.0.9/croot.js";
 
 const isGithubPages = window.location.hostname.includes("github.io");
-const repoName = "dashboard"; // Ganti dengan nama repositori Anda
+const repoName = "makanaear.github.io"; // Sesuaikan dengan nama repo Anda
 
-// Sesuaikan jalur jika di-host pada GitHub Pages
-export const croot = folderPath() + (isGithubPages ? `${repoName}/src/` : "src/");
+// Sesuaikan `croot` untuk menangani path di GitHub Pages
+export const croot = isGithubPages ? `/${repoName}/src/` : folderPath() + "src/";
 
 export const folder = {
   components: croot + "components/",

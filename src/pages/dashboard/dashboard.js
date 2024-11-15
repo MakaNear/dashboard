@@ -1,6 +1,6 @@
-import loadComponent from "/src/helpers/loadComponent.js";
-import { smoothScroll } from "/src/helpers/smoothScroll.js";
-import { url } from "/src/helpers/urlConfig.js";
+import loadComponent from "../../helpers/loadComponent.js";
+import { smoothScroll } from "../../helpers/smoothScroll.js";
+import { url } from "../../helpers/urlConfig.js";
 
 export async function main() {
   const promises = [
@@ -11,9 +11,7 @@ export async function main() {
   ];
 
   Promise.all(promises)
-    .then(() => {
-      smoothScroll();
-    })
+    .then(() => smoothScroll())
     .catch((error) => {
       console.error("Error loading components:", error);
     });

@@ -13,7 +13,7 @@ export const url = {
   components: {
     topbar: folder.components + "topbar/",
     sidebar: folder.components + "sidebar/",
-    footer: folder.components + "footer/"
+    footer: folder.components + "footer/",
   },
   pages: {
     dashboard: folder.pages + "dashboard/",

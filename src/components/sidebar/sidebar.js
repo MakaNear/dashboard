@@ -3,18 +3,13 @@ export default function sidebarTogle() {
     ".app-header .app-header-navigation .submenu a"
   );
 
-  function setActiveLinkByUrl(links) {
-    const currentPath = window.location.pathname;
-    links.forEach((link) => {
-      if (link.getAttribute("href") === currentPath) {
-        link.classList.add("active");
-      } else {
-        link.classList.remove("active");
-      }
-    });
-  }
+  list.forEach((link) => {
+    const href = link.getAttribute("href");
 
-  setActiveLinkByUrl(list);
+    if (window.location.pathname === "/dashboard/" && href === "/dashboard") {
+      link.classList.add("active");
+    }
+  });
 
   const menuItems = document.querySelectorAll("aside.navigation .menu-item");
   if (menuItems) {

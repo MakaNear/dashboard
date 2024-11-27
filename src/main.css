@@ -95,42 +95,78 @@
 .app-header-actions .user-profile {
   display: flex;
   align-items: center;
-  background-color: transparent;
-  border: none;
+  border: 0;
+  background: transparent;
   cursor: pointer;
-  font-size: 14px;
-  color: #333;
-  font-weight: 600;
-  transition: color 0.3s;
+  color: black;
+  transition: 0.25s ease;
+  text-decoration: none;
+  height: 11vh;
 }
-.app-header-actions .user-profile span:first-of-type {
-  margin-right: 10px;
+.app-header-actions .user-profile:hover, .app-header-actions .user-profile:focus {
+  color: #333;
+}
+.app-header-actions .user-profile:hover span:last-child, .app-header-actions .user-profile:focus span:last-child {
+  box-shadow: 0 0 0 4px #f3eee9, 0 0 0 5px #969593;
+}
+.app-header-actions .user-profile span:first-child {
+  display: flex;
+  font-size: 1.125rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #ddd;
+  font-weight: 300;
+}
+.app-header-actions .user-profile span:last-child {
+  transition: 0.25s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-left: 1.5rem;
+  flex-shrink: 0;
 }
 .app-header-actions .user-profile img {
-  border-radius: 50%;
-  width: 36px;
-  height: 36px;
+  width: 100%;
 }
-.app-header-actions .user-profile:hover {
-  transform: scale();
-}
-.app-header-actions .app-header-actions {
+.app-header-actions .app-header-actions-buttons {
   display: flex;
-  gap: 10px;
+  border-left: 1px solid #333;
+  margin-left: 1rem;
+  padding-left: 2rem;
 }
-.app-header-actions .app-header-actions .icon-button {
+.app-header-actions .app-header-actions-buttons > * + * {
+  margin-left: 1rem;
+}
+.app-header-actions .icon-button {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 0;
   background-color: transparent;
-  border: none;
+  border: 1px solid #595959;
+  color: #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
-  font-size: 24px;
-  color: #666;
-  transition: color 0.3s;
+  transition: 0.25s ease;
+  flex-shrink: 0;
 }
-.app-header-actions .app-header-actions .icon-button:hover {
-  color: #007bff;
+.app-header-actions .icon-button.large {
+  width: 50px;
+  height: 50px;
+  font-size: 2vh;
 }
-.app-header-actions .app-header-actions .icon-button i {
-  pointer-events: none;
+.app-header-actions .icon-button i {
+  transition: 0.25s ease;
+}
+.app-header-actions .icon-button:hover, .app-header-actions .icon-button:focus {
+  background-color: #f3eee9;
+  box-shadow: 0 0 0 4px #f3eee9, 0 0 0 5px #595959;
 }
 
 .navigation {
@@ -318,4 +354,4 @@ html.lenis body {
 
 .lenis.lenis-smooth iframe {
   pointer-events: none;
-}
+}/*# sourceMappingURL=main.css.map */

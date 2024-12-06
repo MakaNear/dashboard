@@ -1,50 +1,32 @@
-export default function sidebarToggle() {
-  const list = document.querySelectorAll(
-    ".app-header .app-header-navigation .submenu a"
-  );
+export async function navbar() {
+  const list = document.querySelectorAll(".navbar .nav .nav-main .links a");
 
-  // Highlight active link
   list.forEach((link) => {
     const href = link.getAttribute("href");
 
-    if (window.location.pathname === "/dashboard/" && href === "/dashboard") {
+    if (window.location.pathname === "/" && href === "/") {
       link.classList.add("active");
     }
   });
 
-  // Handle menu items click and save active menu in localStorage
-  const menuItems = document.querySelectorAll("aside.navigation .menu-item");
-  if (menuItems) {
-    menuItems.forEach((menu) => {
-      menu.addEventListener("click", function () {
-        const menuName = this.getAttribute("data-menu");
-        localStorage.setItem("activeMenu", menuName);
-      });
-    });
-  }
-
-  // Retrieve active menu from localStorage and set its submenu to visible
-  const activeMenu = localStorage.getItem("activeMenu");
-  if (activeMenu) {
-    document
-      .querySelectorAll(".app-header .app-header-navigation .submenu")
-      .forEach((submenu) => {
-        submenu.style.display = "none";
-      });
-
-    const activeSubmenu = document.querySelector(`.${activeMenu}-submenu`);
-    if (activeSubmenu) {
-      activeSubmenu.style.display = "flex";
-    }
-  }
-
-  // Logout functionality with SweetAlert
-  const logoutButton = document.querySelector(".navigation-nav .logout");
+  // ----- Display Logout Button ----- //
+  const loginCookie = window.Cookies.get("login"); // Access Cookies from window object
+  const logoutButton = document.querySelector(".nav-others .logout");
+  const loginButton = document.querySelector(".nav-others .to-login");
 
   if (logoutButton) {
-    logoutButton.addEventListener("click", (event) => {
-      event.preventDefault(); // Prevent default behavior
-      Swal.fire({
+    if (loginCookie) {
+      logoutButton.style.display = "inline-block";
+      loginButton.style.display = "none";
+    } else {
+      logoutButton.style.display = "none";
+      loginButton.style.display = "inline-block";
+    }
+
+    // ----- Logout ----- //
+    logoutButton.addEventListener("click", async (event) => {
+      event.preventDefault(); 
+      const result = await Swal.fire({
         title: "Logout Confirmation",
         text: "Are you sure you want to log out?",
         icon: "warning",
@@ -53,9 +35,16 @@ export default function sidebarToggle() {
         cancelButtonColor: "#d33",
         confirmButtonText: "Yes, log out!",
         cancelButtonText: "Cancel",
-      }).then((result) => {
-        if (result.isConfirmed) {
-          // If user confirms logout
+      });
+
+      if (result.isConfirmed) {
+        // Remove token or cookie from the header
+        try {
+          const token = window.Cookies.get("token"); // Assuming token is stored in cookies
+          if (token) {
+            window.Cookies.remove("token"); // Remove token
+          }
+
           Swal.fire({
             title: "Logged Out!",
             text: "You have successfully logged out.",
@@ -66,8 +55,15 @@ export default function sidebarToggle() {
             window.Cookies.remove("login"); // Remove login cookie
             window.location.href = "/login"; // Redirect to login page
           });
+        } catch (error) {
+          Swal.fire({
+            title: "Error!",
+            text: "Failed to log out. Please try again.",
+            icon: "error",
+            confirmButtonColor: "#d33",
+          });
         }
-      });
+      }
     });
   }
 }

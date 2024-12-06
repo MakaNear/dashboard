@@ -3,17 +3,10 @@ import { smoothScroll } from "../../helpers/smoothScroll.js";
 import { url } from "../../helpers/urlConfig.js";
 import sidebarTogle from "../../components/sidebar/sidebar.js";
 import FetchProfileTopbar from "../../components/topbar/profile.js";
-import getCookie from "https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.mjs";
-
-function getCookie(name){
-  const value = `; ${document.cookie}`;
-  const parts = value.split(`; ${name}=`);
-  if (parts.length === 2) return parts.pop().split(';').shift();
-  return null;
-}
+import Cookies from "https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.mjs";
 
 export async function main() {
-  const token = getCookie('login');
+  const token = Cookies.get('login');
   if (!token) {
     window.location.href = "https://makanear.github.io/login";
     return;

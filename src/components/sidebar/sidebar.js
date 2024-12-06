@@ -52,16 +52,18 @@ export default function sidebarToggle() {
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
         confirmButtonText: "Yes, log out!",
+        cancelButtonText: "Cancel",
       }).then((result) => {
         if (result.isConfirmed) {
+          // If user confirms logout
           Swal.fire({
             title: "Logged Out!",
             text: "You have successfully logged out.",
             icon: "success",
-            timer: 2000,
             showConfirmButton: false,
+            timer: 2000, // Show alert for 2 seconds
           }).then(() => {
-            window.Cookies.remove("login"); // Use window.Cookies to remove cookie
+            window.Cookies.remove("login"); // Remove login cookie
             window.location.href = "/login"; // Redirect to login page
           });
         }

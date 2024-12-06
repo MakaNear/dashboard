@@ -4,7 +4,18 @@ import { url } from "../../helpers/urlConfig.js";
 import sidebarTogle from "../../components/sidebar/sidebar.js";
 import FetchProfileTopbar from "../../components/topbar/profile.js";
 
+function getCookie(name){
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop().split(';').shift();
+  return null;
+}
+
 export async function main() {
+  const token = getCookie('login');
+  if (!token) {
+    window.location.href = "https://makanear.github.io/login";
+  }
   const promises = [
     loadComponent("header.topbar", url.components.topbar + "topbar.html"),
     loadComponent("aside.sidebar", url.components.sidebar + "sidebar.html"),

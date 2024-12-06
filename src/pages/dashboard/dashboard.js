@@ -15,6 +15,7 @@ export async function main() {
   const token = getCookie('login');
   if (!token) {
     window.location.href = "https://makanear.github.io/login";
+    return;
   }
   const promises = [
     loadComponent("header.topbar", url.components.topbar + "topbar.html"),

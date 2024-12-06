@@ -14,11 +14,40 @@ function getCookie(name) {
   }
   return null;
 }
+
+async function validateToken(token) {
+  try {
+    const response = await fetch("/api/validate-token", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ token }),
+    });
+
+    if (response.ok) {
+      const result = await response.json();
+      return result.valid; // Server should return { valid: true } if the token is valid
+    } else {
+      console.error("Token validation failed:", response.statusText);
+      return false;
+    }
+  } catch (error) {
+    console.error("Error validating token:", error);
+    return false;
+  }
+}
 export async function main() {
 
   const token = getCookie("token");
   if (!token) {
     window.location.href = "/login";
+    return;
+  }
+
+  const isValidToken = await validateToken(token);
+  if (!isValidToken) {
+    window.location.href = "/dashboard";
     return;
   }
   const promises = [

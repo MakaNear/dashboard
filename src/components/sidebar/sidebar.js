@@ -1,8 +1,9 @@
-export default function sidebarTogle() {
+export default function sidebarToggle() {
   const list = document.querySelectorAll(
     ".app-header .app-header-navigation .submenu a"
   );
 
+  // Highlight active link
   list.forEach((link) => {
     const href = link.getAttribute("href");
 
@@ -11,17 +12,18 @@ export default function sidebarTogle() {
     }
   });
 
+  // Handle menu items click and save active menu in localStorage
   const menuItems = document.querySelectorAll("aside.navigation .menu-item");
   if (menuItems) {
     menuItems.forEach((menu) => {
-      menu.addEventListener("click", function (e) {
+      menu.addEventListener("click", function () {
         const menuName = this.getAttribute("data-menu");
-
         localStorage.setItem("activeMenu", menuName);
       });
     });
   }
 
+  // Retrieve active menu from localStorage and set its submenu to visible
   const activeMenu = localStorage.getItem("activeMenu");
   if (activeMenu) {
     document
@@ -36,10 +38,34 @@ export default function sidebarTogle() {
     }
   }
 
+  // Logout functionality with SweetAlert
   const logoutButton = document.querySelector(".navigation-nav .logout");
 
-  logoutButton.addEventListener("click", () => {
-    window.Cookies.remove("login"); // Use window.Cookies to remove cookie
-    window.location.href = "/login";
-  });
+  if (logoutButton) {
+    logoutButton.addEventListener("click", (event) => {
+      event.preventDefault(); // Prevent default behavior
+      Swal.fire({
+        title: "Logout Confirmation",
+        text: "Are you sure you want to log out?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, log out!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire({
+            title: "Logged Out!",
+            text: "You have successfully logged out.",
+            icon: "success",
+            timer: 2000,
+            showConfirmButton: false,
+          }).then(() => {
+            window.Cookies.remove("login"); // Use window.Cookies to remove cookie
+            window.location.href = "/login"; // Redirect to login page
+          });
+        }
+      });
+    });
+  }
 }

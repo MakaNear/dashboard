@@ -3,6 +3,7 @@ import { smoothScroll } from "../../helpers/smoothScroll.js";
 import { url } from "../../helpers/urlConfig.js";
 import sidebarTogle from "../../components/sidebar/sidebar.js";
 import FetchProfileTopbar from "../../components/topbar/profile.js";
+import getCookie from "https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.mjs";
 
 function getCookie(name){
   const value = `; ${document.cookie}`;

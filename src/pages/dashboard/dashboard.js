@@ -27,7 +27,7 @@ async function validateToken(token) {
 
     if (response.ok) {
       const result = await response.json();
-      return result.valid; // Server should return { valid: true } if the token is valid
+      return result.valid;
     } else {
       console.error("Token validation failed:", response.statusText);
       return false;
@@ -37,19 +37,22 @@ async function validateToken(token) {
     return false;
   }
 }
-export async function main() {
 
+export async function main() {
   const token = getCookie("token");
+
   if (!token) {
     window.location.href = "/login";
     return;
   }
 
   const isValidToken = await validateToken(token);
+
   if (!isValidToken) {
-    window.location.href = "/dashboard";
+    window.location.href = "/login";
     return;
   }
+
   const promises = [
     loadComponent("header.topbar", url.components.topbar + "topbar.html"),
     loadComponent("aside.sidebar", url.components.sidebar + "sidebar.html"),

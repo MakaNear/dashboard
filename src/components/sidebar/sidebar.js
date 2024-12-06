@@ -35,4 +35,11 @@ export default function sidebarTogle() {
       activeSubmenu.style.display = "flex";
     }
   }
+
+  const logoutButton = document.querySelector(".navigation-nav .logout");
+
+  logoutButton.addEventListener("click", () => {
+    window.Cookies.remove("login"); // Use window.Cookies to remove cookie
+    window.location.href = "/login";
+  });
 }

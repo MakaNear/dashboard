@@ -54,6 +54,7 @@
       color: map-get($map: v.$color, $key: "dark-gray");
       font-family: v.$vietnam;
       margin-bottom: 1vw;
+      cursor: pointer;
 
       * {
         transition: 0.25s ease;
